@@ -1,17 +1,14 @@
-// src/components/PredictionCard.jsx
+// src/components/PredictionCard.jsx - Simplified version (optional, can be deleted)
 import React from "react";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { motion } from "framer-motion";
-import 'react-circular-progressbar/dist/styles.css';
 
 const getRiskLabel = (p) => {
-  if (p >= 0.5) return { label: "High", color: "#E53E3E" }; // red
-  if (p >= 0.2) return { label: "Moderate", color: "#D69E2E" }; // amber
-  return { label: "Low", color: "#059669" }; // green
+  if (p >= 0.5) return { label: "High Risk", color: "#ef4444", bg: "bg-red-50" };
+  if (p >= 0.2) return { label: "Moderate Risk", color: "#f59e0b", bg: "bg-amber-50" };
+  return { label: "Low Risk", color: "#10b981", bg: "bg-green-50" };
 };
 
-export default function PredictionCard({ probability = 0, onExplainClick }) {
-  // probability in 0..1
+export default function PredictionCard({ probability = 0, compact = false }) {
   const pct = Math.round(probability * 100);
   const risk = getRiskLabel(probability);
 
@@ -20,54 +17,27 @@ export default function PredictionCard({ probability = 0, onExplainClick }) {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45 }}
-      className="bg-white/80 dark:bg-gray-900/70 backdrop-blur-md rounded-2xl shadow-xl p-6 flex flex-col items-center gap-4 max-w-sm"
+      className={`${risk.bg} backdrop-blur-md rounded-2xl shadow-lg p-6 border-2 border-${risk.color.replace('#', '')}/20`}
     >
-      <div className="w-40 h-40">
-        <motion.div
-          initial={{ scale: 0.9 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-          <CircularProgressbar
-            value={pct}
-            text={`${pct}%`}
-            strokeWidth={10}
-            styles={buildStyles({
-              textSize: '22px',
-              textColor: '#0f172a', // adapt to theme
-              pathColor: risk.color,
-              trailColor: '#e6e6e6',
-            })}
-          />
-        </motion.div>
-      </div>
-
       <div className="text-center">
-        <div className="text-sm text-gray-500">Predicted risk</div>
-        <div className="mt-1 text-2xl font-semibold" style={{color: risk.color}}>
+        <div className="text-5xl font-bold mb-2" style={{ color: risk.color }}>
+          {pct}%
+        </div>
+        <div className="text-lg font-semibold text-gray-900 mb-1">
           {risk.label}
         </div>
-        <div className="text-xs text-gray-500">Probability based on model</div>
+        <div className="text-sm text-gray-600">
+          Predicted CHD Risk
+        </div>
       </div>
 
-      <div className="w-full flex gap-2 mt-2">
-        <button
-          onClick={onExplainClick}
-          className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg shadow"
-        >
-          Show Explanation
-        </button>
-        <button
-          onClick={() => navigator.clipboard?.writeText(`${(probability*100).toFixed(1)}%`)}
-          className="px-4 py-2 rounded-lg border border-gray-200 text-sm"
-        >
-          Copy
-        </button>
-      </div>
-
-      <div className="mt-3 text-xs text-gray-500 text-center">
-        <strong>Note:</strong> This model provides informational risk estimate — not a medical diagnosis.
-      </div>
+      {!compact && (
+        <div className="mt-4 pt-4 border-t border-gray-200">
+          <p className="text-xs text-gray-600 text-center">
+            This model provides informational risk estimate — not a medical diagnosis.
+          </p>
+        </div>
+      )}
     </motion.div>
   );
 }
