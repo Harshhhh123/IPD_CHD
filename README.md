@@ -134,7 +134,7 @@ The frontend will be available at `http://localhost:5173`
 - Answers health-related questions
 - Provides guidance on risk factors
 
-## Structured Data Extraction via Generative AI
+### Structured Data Extraction via Generative AI
 -LLM-Based Intelligent Data Extraction from complex medical documents.
 -Uses semantic understanding to identify and structure clinical concepts.
 
