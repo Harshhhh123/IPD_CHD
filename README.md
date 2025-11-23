@@ -9,9 +9,9 @@ This project combines modern web development with machine learning to provide:
 - **SHAP Explainability** - Understand which features contribute most to predictions
 - **Interactive UI** - Step-by-step health data collection and results visualization
 - **Firebase Integration** - Secure data storage and user authentication
-- **OCR Support** - Extract health data from medical documents
+- **LLM Integration** - Gives Personalized lifestyle recommendations and suggestions to improve long-term well-being
 
-## 📁 Project Structure
+## 📁 Projet Structure
 
 ```
 IPD_CHD/
@@ -113,7 +113,7 @@ The frontend will be available at `http://localhost:5173`
 ## 📋 Features
 
 ### Prediction Engine
-- **Input**: 13 patient health metrics (age, BMI, cholesterol, blood pressure, etc.)
+- **Input**: 12 patient health metrics (age, BMI, cholesterol, blood pressure, etc.)
 - **Output**: Binary classification (disease/no disease) with probability score
 - **Model**: XGBoost/LightGBM/CatBoost ensemble
 - **Features**: Includes engineered features like pulse pressure, BP ratio, and interaction terms
@@ -228,7 +228,7 @@ Health check endpoint.
 
 ## 📊 Model Details
 
-### Input Features (13)
+### Input Features (12)
 1. Sex (male/female)
 2. Age
 3. Cigarettes per day
@@ -241,7 +241,7 @@ Health check endpoint.
 10. Diastolic BP
 11. BMI
 12. Glucose
-13. Current smoker status
+
 
 ### Engineered Features (6)
 - Pulse pressure (sysBP - diaBP)
