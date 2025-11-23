@@ -3,11 +3,6 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars, MeshDistortMaterial, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 
-
-
-
-
-
 // Minimal Heart for background
 function MinimalHeart() {
   const heartRef = useRef();
