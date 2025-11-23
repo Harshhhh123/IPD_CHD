@@ -2,6 +2,8 @@
 
 A full-stack machine learning application for predicting cardiovascular heart disease risk using patient health metrics. The application features an intuitive React frontend with interactive visualizations and a FastAPI backend powered by machine learning models with SHAP explainability.
 
+The website is deployed at: https://chd-prediction-75946.web.app/
+
 ## 🎯 Project Overview
 
 This project combines modern web development with machine learning to provide:
@@ -11,7 +13,7 @@ This project combines modern web development with machine learning to provide:
 - **Firebase Integration** - Secure data storage and user authentication
 - **LLM Integration** - Gives Personalized lifestyle recommendations and suggestions to improve long-term well-being
 
-## 📁 Projet Structure
+## 📁 Project Structure
 
 ```
 IPD_CHD/
