@@ -65,7 +65,8 @@ origins = [
     "http://127.0.0.1:5173",
     "http://localhost:3000",   # if you sometimes use CRA/other ports
     "http://127.0.0.1:3000",
-    "*"
+    "*",
+    "https://chd-prediction-75946.web.app"
 ]
 app.add_middleware(
     CORSMiddleware,

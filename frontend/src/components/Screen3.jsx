@@ -159,12 +159,13 @@ const Screen3 = ({ onBack, onComplete }) => {
         return;
       }
 
+      const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
       // Now ***send finalJSON to your backend*** predict + explain
-      const predictResp = await fetch("http://127.0.0.1:8000/predict", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(finalJSON),
-      });
+     const predictResp = await fetch(`${API_URL}/predict`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(finalJSON),
+});
 
       const predictJson = await predictResp.json();
       if (!predictResp.ok) {
@@ -173,11 +174,11 @@ const Screen3 = ({ onBack, onComplete }) => {
         // you might want to handle this more gracefully
       }
 
-      const explainResp = await fetch("http://127.0.0.1:8000/explain", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(finalJSON),
-      });
+      const explainResp = await fetch(`${API_URL}/explain`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(finalJSON),
+});
       const explainJson = await explainResp.json();
       if (!explainResp.ok) {
         console.error("Explain error:", explainJson);
