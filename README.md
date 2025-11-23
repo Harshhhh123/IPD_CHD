@@ -56,13 +56,15 @@ IPD_CHD/
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### Quick Start - Local Development
+
+#### Prerequisites
 - **Python 3.8+** (for backend)
 - **Node.js 18+** (for frontend)
 - **Google Gemini API Key** (for health chatbot - optional)
 - **Firebase Project** (for data storage)
 
-### Backend Setup
+#### Backend Setup
 
 1. Navigate to the backend directory:
 ```bash
@@ -87,7 +89,7 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 The backend will be available at `http://localhost:8000`
 
-### Frontend Setup
+#### Frontend Setup
 
 1. Navigate to the frontend directory:
 ```bash
@@ -297,20 +299,136 @@ npm run preview  # Preview production build
 
 ## 🚢 Deployment
 
-### Backend Deployment
-The FastAPI backend can be deployed to:
-- **AWS EC2** / **Azure VM** - Traditional servers
-- **AWS Lambda / Azure Functions** - Serverless
-- **Docker** - Containerized deployment
-- **Heroku** - PaaS platform
+### Backend Deployment with Docker on Render
 
-### Frontend Deployment
-The React app can be deployed to:
-- **Vercel** - Optimized for Vite
-- **Netlify** - Continuous deployment
-- **GitHub Pages** - Static hosting
-- **AWS S3 + CloudFront** - Global CDN
-- **Azure Static Web Apps** - Integrated CI/CD
+The FastAPI backend is containerized using Docker and deployed on **Render.com**:
+
+**Deployment Architecture:**
+- Docker container with Python 3.11
+- FastAPI with Uvicorn server
+- Automatic deployment from GitHub main branch
+- Health checks enabled for auto-recovery
+- Exposed on port 8000
+
+**Backend Deployment Steps:**
+
+1. **Prerequisites:**
+   - Docker file included in `backend/Dockerfile`
+   - GitHub repository with code pushed
+   - Render.com account
+
+2. **Deploy to Render:**
+   - Go to https://dashboard.render.com
+   - Click "New +" → "Web Service"
+   - Connect your GitHub repository
+   - Select root directory: `./backend`
+   - Environment: `Docker`
+   - Region: Choose closest to you
+   - Click "Create Web Service"
+
+3. **Render will:**
+   - Build the Docker image automatically
+   - Deploy the container
+   - Assign a unique URL: `https://your-service-name.onrender.com`
+   - Monitor health and auto-restart if needed
+
+4. **Access your deployed backend:**
+   - API: `https://your-service-name.onrender.com`
+   - API Documentation: `https://your-service-name.onrender.com/docs`
+   - Health Check: `https://your-service-name.onrender.com/`
+
+5. **Update Frontend Environment:**
+   - Set `VITE_API_URL=https://your-service-name.onrender.com` in frontend `.env`
+
+### Frontend Deployment on Firebase Hosting
+
+The React application is deployed on **Firebase Hosting**:
+
+**Deployment Architecture:**
+- Static React app built with Vite
+- Global CDN distribution
+- Automatic HTTPS and SSL
+- Version management and instant rollback
+
+**Frontend Deployment Steps:**
+
+1. **Prerequisites:**
+   - Firebase project created (https://console.firebase.google.com)
+   - Firebase CLI installed: `npm install -g firebase-tools`
+   - Build completed: `npm run build` in frontend directory
+
+2. **Deploy to Firebase:**
+   ```bash
+   cd frontend
+   
+   # Login to Firebase
+   firebase login
+   
+   # Initialize Firebase in project
+   firebase init hosting
+   
+   # Deploy
+   firebase deploy
+   ```
+
+3. **Configuration:**
+   - Public directory: `dist`
+   - Single Page App: Yes (rewrite URLs to index.html)
+
+4. **Access your deployed frontend:**
+   - URL: `https://your-project-id.firebaseapp.com`
+   - Analytics available in Firebase Console
+
+5. **Custom Domain (Optional):**
+   - Firebase Console → Hosting → Add Custom Domain
+   - Follow DNS verification
+   - Full SSL certificate included
+
+### Environment Variables for Deployment
+
+Update `frontend/.env` with your deployed backend URL:
+```
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+VITE_FIREBASE_PROJECT_ID=your_firebase_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+VITE_FIREBASE_APP_ID=your_firebase_app_id
+VITE_GEMINI_API_KEY=your_gemini_api_key
+VITE_API_URL=https://your-render-backend.onrender.com
+```
+
+### Update Backend CORS
+
+Update `backend/main.py` origins with your Firebase domain:
+```python
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://your-project-id.firebaseapp.com",  # Firebase domain
+    "https://your-custom-domain.com",           # Custom domain if applicable
+]
+```
+
+Then redeploy backend to Render.
+
+### Deployment Summary
+
+| Component | Platform | Status | URL |
+|-----------|----------|--------|-----|
+| **Backend API** | Render (Docker) | ✅ Active | `https://your-service.onrender.com` |
+| **Frontend** | Firebase Hosting | ✅ Active | `https://your-project.firebaseapp.com` |
+| **API Docs** | Render | ✅ Active | `https://your-service.onrender.com/docs` |
+
+### Automatic Redeployment
+
+- **Backend:** Push to GitHub main branch → Render auto-deploys Docker container
+- **Frontend:** Run `firebase deploy` or configure GitHub Actions for auto-deploy
+
+### Monitoring Deployments
+
+- **Render Backend:** Dashboard at https://dashboard.render.com → View logs and metrics
+- **Firebase Frontend:** Console at https://console.firebase.google.com → Hosting tab for analytics
 
 ## 📝 Development Workflow
 
