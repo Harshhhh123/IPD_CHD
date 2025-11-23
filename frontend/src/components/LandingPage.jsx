@@ -128,38 +128,39 @@ const LandingPage = ({ onGetStarted }) => {
     <div className="relative min-h-screen overflow-hidden bg-white">
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-gray-50"></div>
-      
-      {/* Minimal Three.js Background - Very subtle */}
-      
-      {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20">
-        <div className="max-w-6xl mx-auto text-center">
-          
-          
-          {/* Minimal Logo */}
-          {/* <div className="mb-16 animate-fade-in">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-red-600 to-red-500 mb-8 shadow-sm">
-              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-            </div>
-          </div> */}
-
-          {/* Hero Title - Apple Style */}
-          <h1 className="text-5xl md:text-7xl font-semibold text-gray-900 mb-6 tracking-tight leading-[1.1] animate-fade-in">
-            Advanced cardiac risk
-            <br />
-            <span className="text-red-600">
-              assessment
-            </span>
-          </h1>
-          <div className="absolute inset-0 z-0 opacity-[0.09]">
+       <div className="absolute inset-0 z-0 opacity-[0.1]">
         <Canvas>
           <Scene />
         </Canvas>
       </div>
-
+      {/* Main Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20">
+        <div className="max-w-6xl mx-auto text-center">
           
+          {/* Hero Title Section with Heart Background */}
+          <div className="relative mb-6">
+            {/* Heart GIF - positioned specifically behind hero title */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+              <img 
+                src="/heart.gif" 
+                alt="Heart animation"
+                className="w-40 h-40 md:w-56 md:h-56 opacity-8"
+                style={{
+                  filter: 'blur(0.5px)',
+                }}
+              />
+            </div>
+            
+            {/* Hero Title - Apple Style */}
+            <h1 className="relative z-10 text-5xl md:text-7xl font-semibold text-gray-900 tracking-tight leading-[1.1] animate-fade-in">
+              Advanced cardiac risk
+              <br />
+              <span className="text-red-600">
+                assessment
+              </span>
+            </h1>
+          </div>
+
           {/* Subtitle - Clean and professional */}
           <p className="text-xl md:text-2xl text-gray-600 mb-4 font-normal leading-relaxed animate-fade-in-delay max-w-3xl mx-auto">
           AI analysis for coronary heart disease risk prediction for upcoming 10 years.
@@ -291,6 +292,10 @@ const LandingPage = ({ onGetStarted }) => {
 
         .animate-fade-in-delay-5 {
           animation: fade-in 0.6s ease-out 0.75s both;
+        }
+
+        .opacity-8 {
+          opacity: 0.5;
         }
       `}</style>
     </div>
