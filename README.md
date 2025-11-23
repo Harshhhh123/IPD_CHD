@@ -11,7 +11,7 @@ This project combines modern web development with machine learning to provide:
 - **Firebase Integration** - Secure data storage and user authentication
 - **LLM Integration** - Gives Personalized lifestyle recommendations and suggestions to improve long-term well-being
 
-## 📁 Projet Structure
+## 📁 Project Structure
 
 ```
 IPD_CHD/
