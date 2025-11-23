@@ -87,9 +87,9 @@ export const generateFinalJSON = async (sessionId) => {
     const finalJSON = {
       'male': basicDetails?.sex === 'male' ? 1 : 0,
       'age': parseInt(basicDetails?.age) || 0,
-      'education': 1, // Default education level
-      'currentSmoker': basicDetails?.is_smoking === 'yes' ? 1 : 0,
       'cigsPerDay': parseInt(basicDetails?.cigs_per_day) || 0,
+      
+      
       'BPMeds': advancedDetails?.bp_meds === 'yes' ? 1 : 0,
       'prevalentStroke': advancedDetails?.prevalent_stroke === 'yes' ? 1 : 0,
       'prevalentHyp': advancedDetails?.prevalent_hyp === 'yes' ? 1 : 0,
@@ -98,8 +98,9 @@ export const generateFinalJSON = async (sessionId) => {
       'sysBP': parseInt(advancedDetails?.systolic_bp) || 0,
       'diaBP': parseInt(advancedDetails?.diastolic_bp) || 0,
       'BMI': parseFloat(basicDetails?.bmi) || 0,
-      'heartRate': 75, // Default heart rate
-      'glucose': parseFloat(medicalReports?.glucose) || 0
+      
+      'glucose': parseFloat(medicalReports?.glucose) || 0,
+      'currentSmoker': basicDetails?.is_smoking === 'yes' ? 1 : 0,
     };
 
     // Save final JSON to Firestore
@@ -109,7 +110,7 @@ export const generateFinalJSON = async (sessionId) => {
       completedAt: serverTimestamp()
     });
 
-    console.log('\n🎯 ===== FINAL 14-FEATURE JSON FOR ML MODEL =====');
+    console.log('\n🎯 ===== FINAL 13-FEATURE JSON FOR ML MODEL =====');
     console.log(JSON.stringify(finalJSON, null, 2));
     console.log('=================================================\n');
 

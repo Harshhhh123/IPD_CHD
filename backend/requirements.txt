@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+pydantic
+scikit-learn==1.5.1
+pandas
+numpy
+joblib
+python-multipart
+shap
+
+# ML libs used in training:
+xgboost
+lightgbm
+catboost

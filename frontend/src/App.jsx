@@ -1,68 +1,58 @@
-import { useState } from 'react';
-import LandingPage from './components/LandingPage';
-import Screen1 from './components/Screen1';
-import Screen2 from './components/Screen2';
-import Screen3 from './components/Screen3';
+// src/App.jsx
+import React, { useState } from "react";
+import LandingPage from "./components/LandingPage";
+import Screen1 from "./components/Screen1";
+import Screen2 from "./components/Screen2";
+import Screen3 from "./components/Screen3";
+import ResultScreen from "./components/ResultScreen";
+import { createNewSession } from "./utils/sessionManager";
 
-import { createNewSession } from './utils/sessionManager';
-
-function App() {
-  const [currentScreen, setCurrentScreen] = useState('landing');
-  const [finalJSON, setFinalJSON] = useState(null);
+export default function App() {
+  const [currentScreen, setCurrentScreen] = useState("landing");
+  const [finalResult, setFinalResult] = useState(null); // will contain finalJSON + prediction + shap
 
   const handleGetStarted = () => {
-    // Create NEW session when starting assessment
     createNewSession();
-    setCurrentScreen('screen1');
+    setCurrentScreen("screen1");
   };
 
-  const handleComplete = (jsonData) => {
-    setFinalJSON(jsonData);
-    setCurrentScreen('result');
+  const handleComplete = (resultObject) => {
+    // resultObject: { finalJSON, prediction, probability, shap_values }
+    setFinalResult(resultObject);
+    setCurrentScreen("result");
   };
 
   const handleStartNew = () => {
-    // Create NEW session for new assessment
     createNewSession();
-    setFinalJSON(null);
-    setCurrentScreen('screen1');
+    setFinalResult(null);
+    setCurrentScreen("screen1");
   };
 
   return (
     <div className="App">
-      {currentScreen === 'landing' && (
-        <LandingPage onGetStarted={handleGetStarted} />
-      )}
-      
-      {currentScreen === 'screen1' && (
-        <Screen1 
-          onNext={() => setCurrentScreen('screen2')}
-          onBack={() => setCurrentScreen('landing')}
+      {currentScreen === "landing" && <LandingPage onGetStarted={handleGetStarted} />}
+
+      {currentScreen === "screen1" && (
+        <Screen1
+          onNext={() => setCurrentScreen("screen2")}
+          onBack={() => setCurrentScreen("landing")}
         />
       )}
-      
-      {currentScreen === 'screen2' && (
-        <Screen2 
-          onNext={() => setCurrentScreen('screen3')}
-          onBack={() => setCurrentScreen('screen1')}
+
+      {currentScreen === "screen2" && (
+        <Screen2 onNext={() => setCurrentScreen("screen3")} onBack={() => setCurrentScreen("screen1")} />
+      )}
+
+      {currentScreen === "screen3" && (
+        <Screen3
+          onBack={() => setCurrentScreen("screen2")}
+          onComplete={(resultObject) => handleComplete(resultObject)}
         />
       )}
-      
-      {currentScreen === 'screen3' && (
-        <Screen3 
-          onBack={() => setCurrentScreen('screen2')}
-          onComplete={handleComplete}
-        />
-      )}
-      
-      {currentScreen === 'result' && (
-        <ResultScreen 
-          finalJSON={finalJSON}
-          onStartNew={handleStartNew}
-        />
+
+      {currentScreen === "result" && (
+        <ResultScreen finalResult={finalResult} onStartNew={handleStartNew} />
       )}
     </div>
   );
-}
-
-export default App;
+};
