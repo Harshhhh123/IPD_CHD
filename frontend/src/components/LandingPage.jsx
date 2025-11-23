@@ -167,7 +167,7 @@ const LandingPage = ({ onGetStarted }) => {
           
           {/* Subtitle - Clean and professional */}
           <p className="text-xl md:text-2xl text-gray-600 mb-4 font-normal leading-relaxed animate-fade-in-delay max-w-3xl mx-auto">
-            Clinical-grade AI analysis for coronary heart disease risk prediction
+          AI analysis for coronary heart disease risk prediction for upcoming 10 years.
           </p>
           
           <p className="text-base md:text-lg text-gray-500 mb-12 animate-fade-in-delay max-w-2xl mx-auto">
