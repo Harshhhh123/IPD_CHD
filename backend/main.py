@@ -56,7 +56,7 @@ class UserInput(BaseModel):
     diaBP: float
     BMI: float
     glucose: float
-    currentSmoker: int
+    c
 
 app = FastAPI(title="Heart Disease Predictor (FastAPI + SHAP)")
 
