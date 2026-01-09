@@ -251,7 +251,7 @@ const LandingPage = ({ onGetStarted }) => {
           <div className="mt-16 max-w-3xl mx-auto animate-fade-in-delay-5">
             <div className="bg-gray-50 rounded-2xl px-8 py-6 border border-gray-200">
               <p className="text-xs text-gray-600 leading-relaxed">
-                <strong className="text-gray-700 font-medium">Medical Disclaimer:</strong> This assessment provides an informational risk estimate based on clinical data and does not replace professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider for medical decisions and personalized care.
+                <strong className="text-gray-700 font-medium">Disclaimer:</strong> This assessment provides an informational risk estimate based on clinical data and does not replace professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider for medical decisions and personalized care.
               </p>
             </div>
           </div>

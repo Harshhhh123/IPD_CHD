@@ -827,7 +827,7 @@ Talk to your doctor before making major changes.
 💡 Key Point
 Healthy eating and regular activity can help lower your cholesterol.
 
-✅ What You Can Do
+✅ What You Can Do  
 • Eat oats, beans, fruits, and veggies daily
 • Walk at least 30 minutes, 5 days/week
 • Choose nuts, olive oil, and fish over fried foods
